@@ -18,7 +18,11 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '409517402905755', {
             autoConfig: true,
-            em: true // Enables automatic advanced matching for email, phone, and other fields
+            em: true, 
+            fn: true,
+            ln: true, 
+            country: true
+            // Enables automatic advanced matching for email, phone, and other fields
         }); 
         fbq('track', 'PageView');
     </script>
@@ -51,7 +55,7 @@
 
         <button type="button" id="addToWishlistButton">Add to Wishlist</button>
 
-         <button type="button" id="PurchaseButton">Purchase</button>
+         <button type="button" id="purchaseButton">Purchase</button>
     </form>
 
     <!-- JavaScript to trigger the addToCart event -->
@@ -91,6 +95,10 @@
                 return;
             }
 
+
+              fbq('track', 'Purchase', {currency: "USD", value: 30.00});
+
+              
             // Trigger Facebook Pixel AddToCart event with user data
             fbq('track', 'Purchase', {
                 content_name: 'Test Product',
