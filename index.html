@@ -32,7 +32,7 @@
     </noscript>
 </head>
 <body>
-    <h1>Facebook Pixel Add to Cart Test</h1>
+    <h1>Facebook Pixel Test</h1>
 
     <!-- Form to collect Name and Email -->
     <form id="userDetailsForm">
@@ -60,6 +60,36 @@
 
     <!-- JavaScript to trigger the addToCart event -->
     <script>
+   document.getElementById('purchaseButton').addEventListener('click', function() {
+            // Get the values from the form
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+            const email = document.getElementById('email').value;
+            const ccode = document.getElementById('country').value;
+
+            if (!fname || !lname) {
+                alert('Please enter both your names.');
+                return;
+            }
+
+
+          
+    
+            // Trigger Facebook Pixel  event with user data
+            fbq('track', 'Purchase', {
+              
+                value: 50.00,
+                currency: 'USD',
+                fn: fname,    
+                ln: lname, 
+                em: email,
+                country: ccode
+                
+            });
+        });
+
+
+        
         document.getElementById('addToCartButton').addEventListener('click', function() {
             // Get the values from the form
             const fname = document.getElementById('fname').value;
@@ -83,37 +113,7 @@
             });
         });
 
-          document.getElementById('purchaseButton').addEventListener('click', function() {
-            // Get the values from the form
-            const fname = document.getElementById('fname').value;
-            const lname = document.getElementById('lname').value;
-            const email = document.getElementById('email').value;
-            const ccode = document.getElementById('country').value;
-
-            if (!fname || !lname) {
-                alert('Please enter both your names.');
-                return;
-            }
-
-
-              fbq('track', 'Purchase', {currency: "USD", value: 30.00});
-
-              
-            // Trigger Facebook Pixel AddToCart event with user data
-            fbq('track', 'Purchase', {
-                content_name: 'Test Product',
-                content_category: 'Example Category',
-                content_ids: ['1234'],
-                content_type: 'product',
-                value: 50.00,
-                currency: 'USD',
-                fn: fname,    
-                ln: lname, 
-                em: email,
-                country: ccode
-                
-            });
-        });
+       
     </script>
 </body>
 </html>
